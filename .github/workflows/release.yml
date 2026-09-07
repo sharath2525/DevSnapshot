@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows-release:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install Inno Setup
+        run: choco install innosetup --yes --no-progress
+      - name: Build executable and installer
+        shell: cmd
+        run: build_release.bat
+      - name: Create checksums
+        shell: pwsh
+        run: |
+          $setup = Get-ChildItem "dist/installer/DevSnapshot-Setup-*.exe" | Select-Object -First 1
+          $files = @(
+            "dist/DevSnapshot.exe",
+            $setup.FullName
+          )
+          $lines = foreach ($file in $files) {
+            $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $file).Hash.ToLowerInvariant()
+            "$hash  $([IO.Path]::GetFileName($file))"
+          }
+          $lines | Set-Content -Encoding ascii "dist/SHA256SUMS.txt"
+      - name: Publish GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = $env:GITHUB_REF_NAME
+          $version = (Get-Item "dist/DevSnapshot.exe").VersionInfo.ProductVersion
+          if ($tag -ne "v$version") {
+            throw "Tag $tag does not match application version $version"
+          }
+          $setup = Get-ChildItem "dist/installer/DevSnapshot-Setup-*.exe" | Select-Object -First 1
+          gh release create $tag --verify-tag --generate-notes --title "DevSnapshot $tag" `
+            "dist/DevSnapshot.exe" `
+            $setup.FullName `
+            "dist/SHA256SUMS.txt"
