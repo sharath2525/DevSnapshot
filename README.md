@@ -115,6 +115,15 @@ Build and smoke-test the executable and Windows installer:
 Release artifacts are written to `dist\DevSnapshot.exe` and
 `dist\installer\DevSnapshot-Setup-<version>.exe`.
 
+## Microsoft Store
+
+The repository includes a dedicated MSIX builder, package manifest template,
+Store asset generator, listing copy, and certification notes. Partner Center assigns
+the package identity after the product name is reserved, so those exact values are
+provided to the build command instead of being hardcoded.
+
+See [store/README.md](store/README.md) for the Store publishing checklist.
+
 ## Publishing a release
 
 GitHub Actions tests every push and pull request. A semantic-version tag builds the

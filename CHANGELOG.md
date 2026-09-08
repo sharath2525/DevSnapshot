@@ -10,6 +10,7 @@ The format follows Keep a Changelog and the project uses semantic versioning.
 
 - Redesigned the GitHub README with direct latest-release installer and portable download links.
 - Published a stable `DevSnapshot-Setup.exe` release asset so the one-click installer link remains valid across versions.
+- Added reproducible Microsoft Store MSIX packaging, generated Store assets, listing copy, and submission guidance.
 
 ## [1.0.0] - 2026-09-08
 
