@@ -36,6 +36,10 @@ the Start Menu, Windows Search, desktop, Apps > Installed apps, and the standard
 uninstall list. A portable `DevSnapshot.exe` is also published for users who do
 not want to install it.
 
+The MIT license is installed as documentation; setup does not require a separate
+license-acceptance step. Installation uses the current user's Local AppData folder,
+so it does not request administrator permission or write to Program Files.
+
 Windows normally discovers the Start Menu shortcut immediately. If an existing
 Windows sign-in has a stale Start-app catalog, the desktop shortcut works at once;
 signing out and back in (or restarting Windows once) rebuilds that catalog.

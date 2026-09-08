@@ -22,3 +22,5 @@ The format follows Keep a Changelog and the project uses semantic versioning.
 - Kept the settings window geometry stable while changing modes.
 - Prevented backup destinations inside a project from being archived recursively.
 - Isolated packaged Qt dependencies to prevent `QtGui` DLL load failures.
+- Removed the unnecessary installer license-acceptance page that made setup appear blocked.
+- Made the no-admin per-user setup path fixed and created Start Menu and desktop shortcuts automatically.
