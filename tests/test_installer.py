@@ -5,7 +5,8 @@ import unittest
 class InstallerDefinitionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        installer_path = Path(__file__).resolve().parents[1] / "installer" / "DevSnapshot.iss"
+        cls.root = Path(__file__).resolve().parents[1]
+        installer_path = cls.root / "installer" / "DevSnapshot.iss"
         cls.installer = installer_path.read_text(encoding="utf-8").lower()
 
     def test_installer_is_per_user_and_does_not_require_license_acceptance(self) -> None:
@@ -30,6 +31,27 @@ class InstallerDefinitionTests(unittest.TestCase):
         for document in ("license", "readme.md", "privacy.md"):
             with self.subTest(document=document):
                 self.assertIn(f'source: "..\\{document}"', self.installer)
+
+    def test_readme_uses_stable_latest_release_download(self) -> None:
+        readme = (self.root / "README.md").read_text(encoding="utf-8")
+        direct_download = (
+            "https://github.com/DonkRonk17/DevSnapshot/"
+            "releases/latest/download/DevSnapshot-Setup.exe"
+        )
+        self.assertIn(direct_download, readme)
+
+    def test_release_publishes_stable_installer_name(self) -> None:
+        workflow = (self.root / ".github" / "workflows" / "release.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('"dist/DevSnapshot-Setup.exe"', workflow)
+        self.assertIn("Copy-Item", workflow)
+
+    def test_ci_runs_on_repository_default_branch(self) -> None:
+        workflow = (self.root / ".github" / "workflows" / "ci.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("branches: [master, main]", workflow)
 
 
 if __name__ == "__main__":

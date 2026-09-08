@@ -22,12 +22,21 @@ jobs:
       - name: Build executable and installer
         shell: cmd
         run: build_release.bat
+      - name: Create stable installer download
+        shell: pwsh
+        run: |
+          $setup = Get-ChildItem "dist/installer/DevSnapshot-Setup-*.exe" | Select-Object -First 1
+          if (-not $setup) {
+            throw "Versioned installer was not produced"
+          }
+          Copy-Item -LiteralPath $setup.FullName -Destination "dist/DevSnapshot-Setup.exe"
       - name: Create checksums
         shell: pwsh
         run: |
           $setup = Get-ChildItem "dist/installer/DevSnapshot-Setup-*.exe" | Select-Object -First 1
           $files = @(
             "dist/DevSnapshot.exe",
+            "dist/DevSnapshot-Setup.exe",
             $setup.FullName
           )
           $lines = foreach ($file in $files) {
@@ -48,5 +57,6 @@ jobs:
           $setup = Get-ChildItem "dist/installer/DevSnapshot-Setup-*.exe" | Select-Object -First 1
           gh release create $tag --verify-tag --generate-notes --title "DevSnapshot $tag" `
             "dist/DevSnapshot.exe" `
+            "dist/DevSnapshot-Setup.exe" `
             $setup.FullName `
             "dist/SHA256SUMS.txt"

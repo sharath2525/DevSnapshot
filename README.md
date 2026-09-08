@@ -1,199 +1,136 @@
-# DevSnapshot
+<p align="center">
+  <img src="resources/icons/devsnapshot.png" alt="DevSnapshot logo" width="112" height="112">
+</p>
 
-**Checkpoint your project before AI changes it.**
+<h1 align="center">DevSnapshot</h1>
 
-DevSnapshot is a small Windows desktop utility that creates a complete, local ZIP
-checkpoint of a development project. It is designed for the moment before a coding
-assistant, refactor, migration, or other broad change touches many files.
+<p align="center">
+  <strong>Checkpoint your project before AI changes it.</strong><br>
+  A private, offline Windows app for creating complete and verified ZIP snapshots of development projects.
+</p>
 
-DevSnapshot is 100% local and offline. It has no account, API, cloud service,
-telemetry, analytics, ads, update checker, or network code.
+<p align="center">
+  <a href="https://github.com/DonkRonk17/DevSnapshot/actions/workflows/ci.yml"><img alt="Build status" src="https://github.com/DonkRonk17/DevSnapshot/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-7c6cff.svg"></a>
+  <img alt="Windows 10 and 11" src="https://img.shields.io/badge/Windows-10%20%7C%2011-3b82f6.svg">
+  <img alt="Private and offline" src="https://img.shields.io/badge/privacy-100%25%20offline-18c7a2.svg">
+</p>
+
+<p align="center">
+  <a href="https://github.com/DonkRonk17/DevSnapshot/releases/latest/download/DevSnapshot-Setup.exe"><strong>Download DevSnapshot for Windows</strong></a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="https://github.com/DonkRonk17/DevSnapshot/releases/latest/download/DevSnapshot.exe">Portable version</a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="https://github.com/DonkRonk17/DevSnapshot/releases/latest">Release notes</a>
+</p>
+
+> The main download link points directly to the installer attached to the latest GitHub release. No website or intermediate download page is required.
 
 ## Why DevSnapshot?
 
-Git is still strongly recommended. DevSnapshot is not a Git replacement.
+Git protects committed history. DevSnapshot adds a quick local checkpoint containing
+the rest of a working project too: untracked files, `.env` files, local databases,
+IDE settings, dependencies, build output, and local Git metadata.
 
-Git protects committed history. DevSnapshot adds a simple local project checkpoint,
-including files that may not be tracked by Git: `.env` files, machine-specific
-configuration, local databases, IDE settings, and other ignored project state.
+Use it before an AI coding session, large refactor, dependency upgrade, migration,
+or any other change that may touch many files. DevSnapshot complements Git; it does
+not replace it.
 
-A typical workflow is:
+## Quick start
 
-1. Open DevSnapshot.
-2. Select a project and backup destination the first time.
-3. Click **Create Snapshot** before asking an AI coding assistant to refactor the project.
-4. Let the assistant make its changes.
-5. If necessary, manually extract the previous ZIP snapshot.
+1. Click **Download DevSnapshot for Windows** above.
+2. Run `DevSnapshot-Setup.exe`. Installation is per-user and needs no administrator permission.
+3. Choose a project folder and backup location.
+4. Select **Create Snapshot**.
 
-DevSnapshot deliberately does not offer automatic restore in V1, because restoring
-could overwrite active project files.
+The installer adds DevSnapshot to Windows Search, the Start Menu, the desktop, and
+Apps > Installed apps. The portable download can be run without installation.
 
-## Install on Windows
+## What you get
 
-For normal use, download `DevSnapshot-Setup-1.0.0.exe` from GitHub Releases. The
-per-user installer does not require administrator access. It adds DevSnapshot to
-the Start Menu, Windows Search, desktop, Apps > Installed apps, and the standard
-uninstall list. A portable `DevSnapshot.exe` is also published for users who do
-not want to install it.
+- Complete snapshots by default—nothing is silently excluded
+- Optional Custom mode when you intentionally want to skip selected folders
+- `.env`, hidden files, `.gitignore`, and local Git history included by default
+- Integrity verification before a snapshot is reported as successful
+- Streaming ZIP creation without loading the whole project into memory
+- Progress reporting, safe cancellation, and partial-file cleanup
+- Collision-safe archive names and recent-snapshot history
+- Automatic protection against archiving the backup folder into itself
+- Graceful warnings for locked, missing, or inaccessible files
+- No symlink traversal and no modification of project files
 
-The MIT license is installed as documentation; setup does not require a separate
-license-acceptance step. Installation uses the current user's Local AppData folder,
-so it does not request administrator permission or write to Program Files.
+## Complete or Custom
 
-Windows normally discovers the Start Menu shortcut immediately. If an existing
-Windows sign-in has a stale Start-app catalog, the desktop shortcut works at once;
-signing out and back in (or restarting Windows once) rebuilds that catalog.
+| Mode | Best for | Behavior |
+| --- | --- | --- |
+| **Complete — recommended** | A faithful safety checkpoint | Includes every available file and folder |
+| **Custom** | Smaller, intentional archives | Skips only the folders and special files you select |
 
-## Features
+A one-part custom rule such as `node_modules` matches a folder with that name at
+any depth. A project-relative rule such as `dataset/raw` matches only that path and
+its descendants. Glob patterns are intentionally not interpreted.
 
-- One-click, verified ZIP snapshots
-- Responsive PySide6 interface with scan and file-count progress
-- Safe cancellation with incomplete ZIP cleanup
-- `.env`, `.gitignore`, hidden files, local configuration, and `.git` included by default
-- Complete snapshots include every file and folder by default
-- Optional Custom mode with editable folder-name and project-relative exclusions
-- Automatic exclusion when the backup destination is inside the project
-- Collision-safe names such as `project_2026-09-07_19-42-31_2.zip`
-- Recent snapshot history
-- Graceful per-file warnings for locked, missing, or inaccessible files
-- Local settings and rotating error log under `%APPDATA%\DevSnapshot`
-- No symlink traversal and no project file modification
+## Private by design
 
-## Complete and Custom snapshots
+DevSnapshot is local and offline. It has no account, cloud service, API, telemetry,
+analytics, advertisements, update checker, or network code. Project files are read
+only to create the selected local ZIP archive.
 
-Complete mode is the recommended default and has no user-defined exclusions. This
-keeps a checkpoint faithful to the project on disk, including dependency and build
-folders. Custom mode is optional and exposes only the inclusion controls and folder
-rules the user chooses to change.
+Configuration and rotating logs are kept under `%APPDATA%\DevSnapshot`. Logs may
+include useful paths and errors, but never record source contents, `.env` contents,
+passwords, or API keys. See [PRIVACY.md](PRIVACY.md) for the complete policy.
 
-An exclusion with one component, such as `downloads`, matches a folder with that
-name at any depth. A relative rule, such as `dataset/raw`, matches only that project
-path and its descendants. V1 intentionally does not interpret glob syntax.
+## Build from source
 
-## Safety model
-
-Project contents are treated strictly as data. DevSnapshot only reads the selected
-project, creates ZIP files in the selected destination, and writes its own settings
-and logs under AppData. It never runs project code or scripts and never renames,
-deletes, or edits project files.
-
-Symbolic links are skipped instead of followed. ZIP files are streamed from disk, so
-entire project files are not loaded into memory. Each completed archive is checked
-with Python's ZIP integrity test before success is reported.
-
-If the backup directory is a subfolder of the project, that entire subtree is pruned
-from the scan. The project folder itself cannot also be the backup folder.
-
-## Run from source
-
-Requirements:
-
-- Windows 10 or Windows 11
-- Python 3.10 or newer
-
-From this directory in PowerShell:
+Requirements: Windows 10 or 11 and Python 3.10 or newer.
 
 ```powershell
-py -3 -m venv .venv
+git clone https://github.com/DonkRonk17/DevSnapshot.git
+cd DevSnapshot
+py -3.12 -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 python main.py
 ```
 
-All runtime features continue to work when the computer is disconnected from the
-internet. Internet access is only needed initially if `pip` must download PySide6 or
-PyInstaller.
-
-## Run the tests
-
-The core suite uses only the Python standard library and temporary directories:
+Run the tests:
 
 ```powershell
 python -m unittest discover -s tests -v
 ```
 
-The tests cover complete snapshots, `.env` and `.gitignore` inclusion, custom
-exclusions, hidden-file controls, nested paths, `.git` controls, in-project
-backup exclusion, collision-safe filenames, integrity verification, configuration
-persistence, cancellation cleanup, and source-file immutability.
-
-## Build `DevSnapshot.exe`
-
-Run:
+Build the portable executable:
 
 ```powershell
 .\build.bat
 ```
 
-The script finds `.venv`, the Windows `py` launcher, or `python`; installs the pinned
-dependency ranges; runs the complete offline test suite; and invokes the supplied
-PyInstaller spec. The one-file, windowed executable is written to:
-
-```text
-dist\DevSnapshot.exe
-```
-
-Branding is sourced from `resources\icons\devsnapshot.png` and embedded into both
-the application UI and Windows executable during the build.
-
-## Build the Windows installer
-
-Install Inno Setup 6, then run:
+Build and smoke-test the executable and Windows installer:
 
 ```powershell
 .\build_release.bat
 ```
 
-This rebuilds and smoke-tests the portable executable before producing:
-
-```text
-dist\installer\DevSnapshot-Setup-1.0.0.exe
-```
-
-The installer is per-user, registers the application path, and creates the Start
-Menu shortcut that makes DevSnapshot discoverable through Windows Search.
+Release artifacts are written to `dist\DevSnapshot.exe` and
+`dist\installer\DevSnapshot-Setup-<version>.exe`.
 
 ## Publishing a release
 
-GitHub Actions tests and builds every push and pull request. Pushing a semantic
-version tag such as `v1.0.0` builds the EXE and installer, generates SHA-256
-checksums, and creates the GitHub Release automatically.
+GitHub Actions tests every push and pull request. A semantic-version tag builds the
+Windows executable and installer, creates SHA-256 checksums, and publishes a GitHub
+release containing both the versioned installer and the stable one-click download
+name used by this README.
 
 ```powershell
-git tag v1.0.0
+git push -u origin master
 git push origin v1.0.0
 ```
 
-## Local files
+## Contributing
 
-- Configuration: `%APPDATA%\DevSnapshot\config.json`
-- Log: `%APPDATA%\DevSnapshot\logs\devsnapshot.log`
+Issues and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md),
+[SECURITY.md](SECURITY.md), and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) first.
 
-The configuration contains paths and preferences only. Logs contain application
-events, filenames/paths when useful for troubleshooting, and errors. Neither stores
-source contents, `.env` contents, passwords, or API keys.
+## License
 
-## Project layout
-
-```text
-devsnapshot/
-├── main.py
-├── app/
-│   ├── core/       # configuration, exclusions, history, ZIP engine
-│   ├── ui/         # first run, dashboard, settings, warning details, theme
-│   ├── workers/    # QThread worker
-│   └── utils/      # paths and local logging
-├── resources/icons/
-├── tests/
-├── installer/
-├── .github/workflows/
-├── requirements.txt
-├── DevSnapshot.spec
-├── build.bat
-└── build_release.bat
-```
-
-## Contributing and license
-
-See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and
-[PRIVACY.md](PRIVACY.md). DevSnapshot is released under the [MIT License](LICENSE).
+DevSnapshot is open-source software released under the [MIT License](LICENSE).
