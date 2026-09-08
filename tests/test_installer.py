@@ -34,11 +34,10 @@ class InstallerDefinitionTests(unittest.TestCase):
 
     def test_readme_uses_stable_latest_release_download(self) -> None:
         readme = (self.root / "README.md").read_text(encoding="utf-8")
-        direct_download = (
-            "https://github.com/sharath2525/DevSnapshot/"
-            "releases/latest/download/DevSnapshot-Setup.exe"
-        )
+        direct_download = "../../releases/latest/download/DevSnapshot-Setup.exe"
         self.assertIn(direct_download, readme)
+        self.assertNotIn("github.com/sharath2525", readme)
+        self.assertNotIn("github.com/DonkRonk17", readme)
 
     def test_release_publishes_stable_installer_name(self) -> None:
         workflow = (self.root / ".github" / "workflows" / "release.yml").read_text(
