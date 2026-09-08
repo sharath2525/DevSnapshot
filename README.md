@@ -123,7 +123,7 @@ release containing both the versioned installer and the stable one-click downloa
 name used by this README.
 
 ```powershell
-git push -u origin master
+git push -u origin main
 git push origin v1.0.0
 ```
 
