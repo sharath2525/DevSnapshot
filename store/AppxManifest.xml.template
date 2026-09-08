@@ -6,13 +6,13 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap uap10 rescap">
   <Identity
-    Name="__IDENTITY_NAME__"
-    Publisher="__PUBLISHER__"
+    Name="DSCHub.DevSnapshot"
+    Publisher="CN=E74A0FAA-A933-4571-9E0A-636452BCEDB9"
     Version="__VERSION__"
     ProcessorArchitecture="x64" />
   <Properties>
     <DisplayName>DevSnapshot</DisplayName>
-    <PublisherDisplayName>__PUBLISHER_DISPLAY_NAME__</PublisherDisplayName>
+    <PublisherDisplayName>DSC Hub</PublisherDisplayName>
     <Description>Checkpoint development projects before broad changes.</Description>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

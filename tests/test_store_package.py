@@ -10,15 +10,23 @@ class StorePackageTests(unittest.TestCase):
         cls.manifest_path = cls.root / "store" / "AppxManifest.xml.template"
         cls.manifest_text = cls.manifest_path.read_text(encoding="utf-8")
 
-    def test_manifest_is_well_formed_and_uses_partner_identity_tokens(self) -> None:
+    def test_manifest_is_well_formed_and_uses_reserved_partner_identity(self) -> None:
         root = ET.fromstring(self.manifest_text)
         namespace = {"f": "http://schemas.microsoft.com/appx/manifest/foundation/windows10"}
         identity = root.find("f:Identity", namespace)
         self.assertIsNotNone(identity)
-        self.assertEqual("__IDENTITY_NAME__", identity.attrib["Name"])
-        self.assertEqual("__PUBLISHER__", identity.attrib["Publisher"])
+        self.assertEqual("DSCHub.DevSnapshot", identity.attrib["Name"])
+        self.assertEqual(
+            "CN=E74A0FAA-A933-4571-9E0A-636452BCEDB9",
+            identity.attrib["Publisher"],
+        )
         self.assertEqual("__VERSION__", identity.attrib["Version"])
         self.assertEqual("x64", identity.attrib["ProcessorArchitecture"])
+        publisher_display_name = root.find(
+            "f:Properties/f:PublisherDisplayName", namespace
+        )
+        self.assertIsNotNone(publisher_display_name)
+        self.assertEqual("DSC Hub", publisher_display_name.text)
 
     def test_manifest_declares_desktop_full_trust_application(self) -> None:
         self.assertIn('Name="Windows.Desktop"', self.manifest_text)

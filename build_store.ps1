@@ -1,17 +1,5 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string]$IdentityName,
-
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string]$Publisher,
-
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string]$PublisherDisplayName,
-
     [ValidatePattern('^[1-9][0-9]{0,4}\.[0-9]{1,5}\.[0-9]{1,5}\.0$')]
     [string]$Version = '1.0.0.0'
 )
@@ -47,11 +35,6 @@ function Invoke-Checked {
     if ($LASTEXITCODE -ne 0) {
         throw "Command failed with exit code $LASTEXITCODE`: $FilePath"
     }
-}
-
-function ConvertTo-XmlAttribute {
-    param([Parameter(Mandatory = $true)][string]$Value)
-    return [Security.SecurityElement]::Escape($Value)
 }
 
 try {
@@ -122,11 +105,7 @@ try {
         '--listing-output' $listingOutput
 
     $manifestTemplate = Get-Content -LiteralPath (Join-Path $repoRoot 'store\AppxManifest.xml.template') -Raw
-    $manifest = $manifestTemplate
-    $manifest = $manifest.Replace('__IDENTITY_NAME__', (ConvertTo-XmlAttribute $IdentityName))
-    $manifest = $manifest.Replace('__PUBLISHER__', (ConvertTo-XmlAttribute $Publisher))
-    $manifest = $manifest.Replace('__PUBLISHER_DISPLAY_NAME__', (ConvertTo-XmlAttribute $PublisherDisplayName))
-    $manifest = $manifest.Replace('__VERSION__', $Version)
+    $manifest = $manifestTemplate.Replace('__VERSION__', $Version)
     $manifestPath = Join-Path $packageRoot 'AppxManifest.xml'
     Set-Content -LiteralPath $manifestPath -Value $manifest -Encoding utf8
 

@@ -12,26 +12,20 @@ In Partner Center, open **Apps and games**, select **New product**, then select
 Reserving a product creates a Partner Center record. Confirm the account and name
 before selecting **Reserve product name**.
 
-## 2. Copy the Store identity
+## 2. Store identity
 
-Open the reserved product, expand **Product management**, and select
-**Product identity**. Copy these three values exactly; they are case-sensitive:
+The Store-assigned, case-sensitive identity is embedded in the manifest template:
 
-- Package/Identity/Name
-- Package/Identity/Publisher
-- Package/Properties/PublisherDisplayName
+- Package/Identity/Name: `DSCHub.DevSnapshot`
+- Package/Identity/Publisher: `CN=E74A0FAA-A933-4571-9E0A-636452BCEDB9`
+- Package/Properties/PublisherDisplayName: `DSC Hub`
 
 ## 3. Build the MSIX
 
-From PowerShell in the repository root, substitute the three exact Partner Center
-values:
+From PowerShell in the repository root:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\build_store.ps1 `
-  -IdentityName '<Package/Identity/Name>' `
-  -Publisher '<Package/Identity/Publisher>' `
-  -PublisherDisplayName '<PublisherDisplayName>' `
-  -Version '1.0.0.0'
+powershell -ExecutionPolicy Bypass -File .\build_store.ps1 -Version '1.0.0.0'
 ```
 
 The builder creates an isolated temporary Python environment, runs all tests,
