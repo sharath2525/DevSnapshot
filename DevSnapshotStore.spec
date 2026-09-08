@@ -8,6 +8,7 @@ logo_path = project_root / "resources" / "icons" / "devsnapshot.png"
 legacy_icon_path = project_root / "resources" / "icons" / "devsnapshot.ico"
 icon_path = legacy_icon_path if legacy_icon_path.is_file() else logo_path
 version_path = project_root / "version_info.txt"
+manifest_path = project_root / "windows_app.manifest"
 data_files = []
 if logo_path.is_file():
     data_files.append((str(logo_path), "resources/icons"))
@@ -70,6 +71,7 @@ exe = EXE(
     entitlements_file=None,
     icon=str(icon_path) if icon_path.is_file() else None,
     version=str(version_path) if version_path.is_file() else None,
+    manifest=str(manifest_path),
 )
 
 coll = COLLECT(

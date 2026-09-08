@@ -68,3 +68,9 @@ Test procedure:
 5. Confirm the success state and verified ZIP file in the destination.
 
 No special credentials or external dependencies are required.
+
+The package includes the standard CPython 3.12 and Qt 6 runtimes. The Windows App
+Certification Kit's optional blocked-executable heuristic can report process-launch
+APIs and short text matches inside those upstream binaries. DevSnapshot does not
+run project files or debugging tools. Its only shell launch is the explicit
+user-facing action that opens the selected backup folder in Windows Explorer.

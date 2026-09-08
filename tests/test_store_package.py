@@ -45,6 +45,19 @@ class StorePackageTests(unittest.TestCase):
         self.assertIn("must be between 0 and 65535", build)
         self.assertIn('"ds-" + [guid]', build)
 
+    def test_executable_manifest_declares_per_monitor_v2_dpi(self) -> None:
+        executable_manifest = (
+            self.root / "windows_app.manifest"
+        ).read_text(encoding="utf-8")
+        ET.fromstring(executable_manifest)
+        self.assertIn("PerMonitorV2, PerMonitor", executable_manifest)
+        self.assertIn('level="asInvoker"', executable_manifest)
+
+        for spec_name in ("DevSnapshot.spec", "DevSnapshotStore.spec"):
+            spec = (self.root / spec_name).read_text(encoding="utf-8")
+            self.assertIn('project_root / "windows_app.manifest"', spec)
+            self.assertIn("manifest=str(manifest_path)", spec)
+
     def test_store_guidance_and_listing_exist(self) -> None:
         self.assertTrue((self.root / "store" / "README.md").is_file())
         self.assertTrue((self.root / "store" / "LISTING.md").is_file())

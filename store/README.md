@@ -51,5 +51,11 @@ Run the Windows App Certification Kit before submitting. Do not click **Submit f
 certification** until every listing, privacy, ownership, and market detail has been
 reviewed.
 
+The generated WACK report can show an overall warning from its optional
+blocked-executable heuristic because the standard Python and Qt runtime binaries
+contain process-launch APIs and short text matches. All mandatory package and
+manifest tests must pass. Use the explanation in [LISTING.md](LISTING.md) as a
+certification note.
+
 For updates, increase one of the first three version components and keep the fourth
 component at `0`, for example `1.0.1.0`.
