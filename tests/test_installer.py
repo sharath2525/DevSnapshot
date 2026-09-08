@@ -35,7 +35,7 @@ class InstallerDefinitionTests(unittest.TestCase):
     def test_readme_uses_stable_latest_release_download(self) -> None:
         readme = (self.root / "README.md").read_text(encoding="utf-8")
         direct_download = (
-            "https://github.com/DonkRonk17/DevSnapshot/"
+            "https://github.com/sharath2525/DevSnapshot/"
             "releases/latest/download/DevSnapshot-Setup.exe"
         )
         self.assertIn(direct_download, readme)

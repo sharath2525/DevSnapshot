@@ -10,18 +10,18 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/DonkRonk17/DevSnapshot/actions/workflows/ci.yml"><img alt="Build status" src="https://github.com/DonkRonk17/DevSnapshot/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/sharath2525/DevSnapshot/actions/workflows/ci.yml"><img alt="Build status" src="https://github.com/sharath2525/DevSnapshot/actions/workflows/ci.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-7c6cff.svg"></a>
   <img alt="Windows 10 and 11" src="https://img.shields.io/badge/Windows-10%20%7C%2011-3b82f6.svg">
   <img alt="Private and offline" src="https://img.shields.io/badge/privacy-100%25%20offline-18c7a2.svg">
 </p>
 
 <p align="center">
-  <a href="https://github.com/DonkRonk17/DevSnapshot/releases/latest/download/DevSnapshot-Setup.exe"><strong>Download DevSnapshot for Windows</strong></a>
+  <a href="https://github.com/sharath2525/DevSnapshot/releases/latest/download/DevSnapshot-Setup.exe"><strong>Download DevSnapshot for Windows</strong></a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="https://github.com/DonkRonk17/DevSnapshot/releases/latest/download/DevSnapshot.exe">Portable version</a>
+  <a href="https://github.com/sharath2525/DevSnapshot/releases/latest/download/DevSnapshot.exe">Portable version</a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="https://github.com/DonkRonk17/DevSnapshot/releases/latest">Release notes</a>
+  <a href="https://github.com/sharath2525/DevSnapshot/releases/latest">Release notes</a>
 </p>
 
 > The main download link points directly to the installer attached to the latest GitHub release. No website or intermediate download page is required.
@@ -85,7 +85,7 @@ passwords, or API keys. See [PRIVACY.md](PRIVACY.md) for the complete policy.
 Requirements: Windows 10 or 11 and Python 3.10 or newer.
 
 ```powershell
-git clone https://github.com/DonkRonk17/DevSnapshot.git
+git clone https://github.com/sharath2525/DevSnapshot.git
 cd DevSnapshot
 py -3.12 -m venv .venv
 .venv\Scripts\Activate.ps1
