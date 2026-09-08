@@ -32,9 +32,13 @@ could overwrite active project files.
 
 For normal use, download `DevSnapshot-Setup-1.0.0.exe` from GitHub Releases. The
 per-user installer does not require administrator access. It adds DevSnapshot to
-the Start Menu, Windows Search, Apps > Installed apps, and the standard uninstall
-list. A portable `DevSnapshot.exe` is also published for users who do not want to
-install it.
+the Start Menu, Windows Search, desktop, Apps > Installed apps, and the standard
+uninstall list. A portable `DevSnapshot.exe` is also published for users who do
+not want to install it.
+
+Windows normally discovers the Start Menu shortcut immediately. If an existing
+Windows sign-in has a stale Start-app catalog, the desktop shortcut works at once;
+signing out and back in (or restarting Windows once) rebuilds that catalog.
 
 ## Features
 
