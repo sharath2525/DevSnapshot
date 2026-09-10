@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="304" height="64" viewBox="0 0 304 64" role="img" aria-labelledby="title description">
+  <title id="title">Install DevSnapshot from Microsoft Store</title>
+  <desc id="description">Animated indigo download button linking to the Microsoft Store.</desc>
+  <defs>
+    <linearGradient id="store-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4338ca" />
+      <stop offset="1" stop-color="#6366f1" />
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="302" height="62" rx="14" fill="url(#store-gradient)" stroke="#818cf8" stroke-width="2">
+    <animate attributeName="stroke-opacity" values="0.45;1;0.45" dur="3.2s" repeatCount="indefinite" />
+  </rect>
+  <g fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M26 20h22v24H26z" opacity="0.95" />
+    <path d="M26 27h22M37 20v24" opacity="0.72" />
+  </g>
+  <text x="62" y="27" fill="#e0e7ff" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0.7">RECOMMENDED</text>
+  <text x="62" y="46" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Install from Microsoft Store</text>
+  <g transform="translate(274 32)" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-6-6 0 0l-6 6" />
+    <animateTransform attributeName="transform" type="translate" values="274 32;278 32;274 32" dur="2.2s" repeatCount="indefinite" />
+  </g>
+</svg>

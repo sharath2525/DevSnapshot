@@ -17,14 +17,18 @@
 </p>
 
 <p align="center">
-  <a href="../../releases/latest/download/DevSnapshot-Setup.exe"><strong>Download DevSnapshot for Windows</strong></a>
-  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="https://apps.microsoft.com/detail/9PJC014G01TN?hl=en-us&amp;gl=IE&amp;ocid=pdpshare"><img src="docs/assets/download-microsoft-store.svg" alt="Install DevSnapshot from Microsoft Store" width="304" height="64"></a>
+  &nbsp;&nbsp;
+  <a href="../../releases/latest/download/DevSnapshot-Setup.exe"><img src="docs/assets/download-windows-installer.svg" alt="Download the DevSnapshot Windows installer" width="304" height="64"></a>
+</p>
+
+<p align="center">
   <a href="../../releases/latest/download/DevSnapshot.exe">Portable version</a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
   <a href="../../releases/latest">Release notes</a>
 </p>
 
-> The main download link points directly to the installer attached to the latest GitHub release. No website or intermediate download page is required.
+> Install from Microsoft Store for trusted delivery and automatic updates, or use the direct installer from the latest GitHub release. Both downloads contain the same private, offline DevSnapshot app.
 
 ## Why DevSnapshot?
 
@@ -38,7 +42,7 @@ not replace it.
 
 ## Quick start
 
-1. Click **Download DevSnapshot for Windows** above.
+1. Install DevSnapshot from Microsoft Store, or choose the direct Windows installer above.
 2. Run `DevSnapshot-Setup.exe`. Installation is per-user and needs no administrator permission.
 3. Choose a project folder and backup location.
 4. Select **Create Snapshot**.

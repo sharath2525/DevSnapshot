@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="304" height="64" viewBox="0 0 304 64" role="img" aria-labelledby="title description">
+  <title id="title">Download the DevSnapshot Windows installer</title>
+  <desc id="description">Animated slate download button linking directly to the local Windows installer.</desc>
+  <rect x="1" y="1" width="302" height="62" rx="14" fill="#111827" stroke="#475569" stroke-width="2">
+    <animate attributeName="stroke" values="#475569;#818cf8;#475569" dur="3.2s" repeatCount="indefinite" />
+  </rect>
+  <g transform="translate(37 31)" fill="none" stroke="#c7d2fe" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0-11V5M-6-1 0 5l6-6M-9 11H9" />
+    <animateTransform attributeName="transform" type="translate" values="37 29;37 33;37 29" dur="2.2s" repeatCount="indefinite" />
+  </g>
+  <text x="62" y="27" fill="#94a3b8" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0.7">DIRECT DOWNLOAD</text>
+  <text x="62" y="46" fill="#f8fafc" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Windows installer</text>
+  <text x="274" y="39" fill="#c7d2fe" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="500">›</text>
+</svg>
